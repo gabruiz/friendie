@@ -1,4 +1,4 @@
-package services
+package endpoints
 
 import (
 	"fmt"
@@ -6,6 +6,12 @@ import (
 
 	"github.com/gorilla/mux"
 )
+
+func InitMainRestService(router *mux.Router) *mux.Router {
+	router.HandleFunc("/", homePage).Methods(http.MethodGet)
+	router.HandleFunc("/ping", pong).Methods(http.MethodGet)
+	return router
+}
 
 func homePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome to the HomePage!")

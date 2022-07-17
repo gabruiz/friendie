@@ -1,4 +1,4 @@
-package services
+package endpoints
 
 import (
 	logic "backend/logics"
@@ -8,6 +8,11 @@ import (
 
 	"github.com/gorilla/mux"
 )
+
+func InitAccountRestService(router *mux.Router) *mux.Router {
+	router.HandleFunc("/accounts", addAccount).Methods(http.MethodPost)
+	return router
+}
 
 func addAccount(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(w, "Endpoint Hit: createNewUser")
