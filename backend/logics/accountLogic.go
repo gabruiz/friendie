@@ -8,7 +8,7 @@ import (
 	"log"
 )
 
-func AddAccount(reqBody []byte) {
+func AddAccount(reqBody []byte) views.AccountView {
 	if reqBody == nil {
 		log.Fatalf("Input not valid")
 	}
@@ -19,5 +19,6 @@ func AddAccount(reqBody []byte) {
 		log.Fatalf("Error occured during unmarshaling. Error: %s", err.Error())
 	}
 
-	builders.SaveAccount(converters.CreateFromView(account))
+	var savedModel = builders.SaveAccount(converters.AccountCreateFromView(account))
+	return converters.AccountCreateFromModel(savedModel)
 }

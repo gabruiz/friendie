@@ -3,7 +3,6 @@ package builders
 import (
 	"backend/db"
 	"backend/models"
-	"time"
 )
 
 func SaveAccount(account models.AccountModel) models.AccountModel {
@@ -13,7 +12,7 @@ func SaveAccount(account models.AccountModel) models.AccountModel {
 	if err != nil {
 		panic(err.Error())
 	}
-	ins.Exec(account.Name, account.Surname, account.EmailAddress, account.Password, account.City, time.Now())
+	ins.Exec(account.Name, account.Surname, account.EmailAddress, account.Password, account.City, account.CreationDate)
 	defer db.Close()
 
 	return account

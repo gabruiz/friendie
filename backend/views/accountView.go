@@ -16,3 +16,8 @@ type AccountView struct {
 	LastUpdateDate time.Time      `json:"last_update_date"`
 	// active         bool           `json:"active"`
 }
+
+// Write implements io.Writer
+func (AccountView) Write(p []byte) (n int, err error) {
+	panic("unimplemented")
+}

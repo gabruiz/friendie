@@ -2,7 +2,6 @@ package services
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -13,10 +12,12 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: homePage")
 }
 
-func mainHandleRequests() {
-	log.Output(0, "Main Rest Service ready")
+func pong(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Pong!")
+	fmt.Println("Endpoint Hit: pong")
+}
 
-	myRouter := mux.NewRouter().StrictSlash(true)
-	myRouter.HandleFunc("/", homePage)
-	log.Fatal(http.ListenAndServe(":8082", myRouter))
+func mainHandleRequests(w http.ResponseWriter, r *http.Request, router *mux.Router) {
+	homePage(w, r)
+	router.HandleFunc("/ping", pong).Methods(http.MethodGet)
 }
