@@ -22,3 +22,19 @@ func AddAccount(reqBody []byte) views.AccountView {
 	var savedModel = builders.SaveAccount(converters.AccountCreateFromView(account))
 	return converters.AccountCreateFromModel(savedModel)
 }
+
+func GetAccount(reqBody []byte) views.AccountView {
+	if reqBody == nil {
+		log.Fatalf("Input not valid")
+	}
+
+	return views.AccountView{}
+}
+
+func UpdateAccount(reqBody []byte) views.AccountView {
+	if reqBody == nil {
+		log.Fatalf("Input not valid")
+	}
+
+	return views.AccountView{}
+}
