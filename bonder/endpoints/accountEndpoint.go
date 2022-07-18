@@ -2,8 +2,8 @@ package endpoints
 
 import (
 	logic "bonder/logics"
+	"bonder/views"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -19,15 +19,22 @@ func InitAccountRestService(router *mux.Router) {
 }
 
 func addAccount(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(w, "Endpoint Hit: addAccount")
 	reqBody, _ := ioutil.ReadAll(r.Body)
+	if reqBody == nil {
+		log.Fatalf("Input not valid")
+	}
 
-	view := logic.AddAccount(reqBody)
+	var view views.AccountView
+	err := json.Unmarshal(reqBody, &view)
+	if err != nil {
+		log.Fatalf("Error occured during unmarshaling. Error: %s", err.Error())
+	}
+
+	view = logic.AddAccount(view)
 	backToTheFrontend(view, w)
 }
 
 func getAccount(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(w, "Endpoint Hit: getAccount")
 	stringId := mux.Vars(r)["id"]
 	id, _ := strconv.Atoi(stringId)
 
@@ -36,20 +43,29 @@ func getAccount(w http.ResponseWriter, r *http.Request) {
 }
 
 func updateAccount(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(w, "Endpoint Hit: updateAccount")
-	reqBody, _ := ioutil.ReadAll(r.Body)
+	stringId := mux.Vars(r)["id"]
+	id, _ := strconv.Atoi(stringId)
 
-	view := logic.UpdateAccount(reqBody)
+	reqBody, _ := ioutil.ReadAll(r.Body)
+	if reqBody == nil {
+		log.Fatalf("Input not valid")
+	}
+
+	var view views.AccountView
+	err := json.Unmarshal(reqBody, &view)
+	if err != nil {
+		log.Fatalf("Error occured during unmarshaling. Error: %s", err.Error())
+	}
+
+	view = logic.UpdateAccount(id, view)
 	backToTheFrontend(view, w)
 }
 
 func backToTheFrontend(view any, w http.ResponseWriter) {
 	payload, err := json.Marshal(view)
-
 	if err != nil {
 		log.Println(err)
 	}
-
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(payload)
 }
