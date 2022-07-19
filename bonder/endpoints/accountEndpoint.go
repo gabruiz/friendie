@@ -24,7 +24,7 @@ func addAccount(w http.ResponseWriter, r *http.Request) {
 		log.Fatalf("Input not valid")
 	}
 
-	var view views.AccountView
+	var view views.Account
 	err := json.Unmarshal(reqBody, &view)
 	if err != nil {
 		log.Fatalf("Error occured during unmarshaling. Error: %s", err.Error())
@@ -51,7 +51,7 @@ func updateAccount(w http.ResponseWriter, r *http.Request) {
 		log.Fatalf("Input not valid")
 	}
 
-	var view views.AccountView
+	var view views.Account
 	err := json.Unmarshal(reqBody, &view)
 	if err != nil {
 		log.Fatalf("Error occured during unmarshaling. Error: %s", err.Error())

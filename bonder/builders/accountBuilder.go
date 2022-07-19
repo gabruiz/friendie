@@ -7,24 +7,39 @@ import (
 
 var db = database.DatabaseConnection()
 
-func SaveAccount(account models.AccountModel) models.AccountModel {
-	ins, err := db.Prepare("INSERT INTO account (name, surname, email_address, password, city, creation_date) VALUES (?,?,?,?,?,?)")
+func SaveAccount(model models.Account) models.Account {
+	ins, err := db.Prepare("INSERT INTO accounts (name, surname, email_address, password, city, created_at) VALUES (?,?,?,?,?,?)")
 	if err != nil {
 		panic(err.Error())
 	}
-	ins.Exec(account.Name, account.Surname, account.EmailAddress, account.Password, account.City, account.CreationDate)
-	defer db.Close()
+	ins.Exec(model.Name, model.Surname, model.EmailAddress, model.Password, model.City, model.CreatedAt)
 
-	return account
+	return model
 }
 
-func GetAccount(id int) models.AccountModel {
-	ins, err := db.Prepare("SELECT * FROM account WHERE id = (?)")
+func GetAccount(id int) models.Account {
+	var model models.Account
+	results, err := db.Query("SELECT id, name, surname, email_address, city FROM accounts WHERE id = ?", id)
 	if err != nil {
 		panic(err.Error())
 	}
-	ins.Exec(id)
+
+	for results.Next() {
+		err = results.Scan(&model.Id, &model.Name, &model.Surname, &model.EmailAddress, &model.City)
+		if err != nil {
+			panic(err.Error())
+		}
+	}
+
+	return model
+}
+
+func UpdateAccount(model models.Account) models.Account {
+	_, err := db.Query("UPDATE accounts SET name ?, surname ?, city ?, updated_at ? where id = ?", model.Name, model.Surname, model.City, model.UpdatedAt, model.Id)
+	if err != nil {
+		panic(err.Error())
+	}
 	defer db.Close()
 
-	return models.AccountModel{}
+	return model
 }
