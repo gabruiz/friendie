@@ -8,11 +8,11 @@ import (
 var db = database.Connection()
 
 func SaveAccount(model models.Account) models.Account {
-	ins, err := db.Prepare("INSERT INTO accounts (name, surname, email_address, password, city, created_at) VALUES (?,?,?,?,?,?)")
+	ins, err := db.Prepare("INSERT INTO accounts (name, surname, email_address, password, city, create_at) VALUES (?,?,?,?,?,?)")
 	if err != nil {
 		panic(err.Error())
 	}
-	ins.Exec(model.Name, model.Surname, model.EmailAddress, model.Password, model.City, model.CreatedAt)
+	ins.Exec(model.Name, model.Surname, model.EmailAddress, model.Password, model.City, model.CreateAt)
 
 	return model
 }
@@ -35,7 +35,7 @@ func GetAccount(id int) models.Account {
 }
 
 func UpdateAccount(model models.Account) models.Account {
-	_, err := db.Query("UPDATE accounts SET name ?, surname ?, city ?, updated_at ? where id = ?", model.Name, model.Surname, model.City, model.UpdatedAt, model.Id)
+	_, err := db.Query("UPDATE accounts SET name ?, surname ?, city ?, update_at ? where id = ?", model.Name, model.Surname, model.City, model.UpdateAt, model.Id)
 	if err != nil {
 		panic(err.Error())
 	}

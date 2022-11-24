@@ -13,6 +13,6 @@ type Account struct {
 	Password     string
 	City         enums.CityEnum
 	Active       bool
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
+	CreateAt     time.Time
+	UpdateAt     time.Time
 }

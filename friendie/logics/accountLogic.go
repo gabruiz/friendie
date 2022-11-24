@@ -9,7 +9,7 @@ import (
 
 func AddAccount(view views.Account) views.Account {
 	model := converters.AccountCreateFromView(view)
-	model.CreatedAt = time.Now()
+	model.CreateAt = time.Now()
 	model = builders.SaveAccount(model)
 	return converters.AccountCreateFromModel(model)
 }
@@ -38,7 +38,7 @@ func UpdateAccount(id int, view views.Account) views.Account {
 		model.Password = view.Password
 	}
 
-	model.UpdatedAt = time.Now()
+	model.UpdateAt = time.Now()
 
 	model = builders.UpdateAccount(model)
 	return converters.AccountCreateFromModel(model)
