@@ -16,6 +16,9 @@ func InitAccountRestService(router *mux.Router) {
 	router.HandleFunc("/accounts", addAccount).Methods(http.MethodPost)
 	router.HandleFunc("/accounts/{id:[0-9]+}", getAccount).Methods(http.MethodGet)
 	router.HandleFunc("/accounts/{id:[0-9]+}", updateAccount).Methods(http.MethodPut)
+	router.HandleFunc("/accounts/{id:[0-9]+}", deactivateAccount).Methods(http.MethodPut)
+	router.HandleFunc("/accounts/{id:[0-9]+}", activateAccount).Methods(http.MethodPut)
+
 }
 
 func addAccount(w http.ResponseWriter, r *http.Request) {
@@ -59,6 +62,24 @@ func updateAccount(w http.ResponseWriter, r *http.Request) {
 
 	view = logic.UpdateAccount(id, view)
 	backToTheFrontend(view, w)
+}
+
+func deactivateAccount(w http.ResponseWriter, r *http.Request) {
+	stringId := mux.Vars(r)["id"]
+	id, _ := strconv.Atoi(stringId)
+
+	logic.DeactivateAccount(id)
+	var response = "Account disattivato con successo"
+	backToTheFrontend(response, w)
+}
+
+func activateAccount(w http.ResponseWriter, r *http.Request) {
+	stringId := mux.Vars(r)["id"]
+	id, _ := strconv.Atoi(stringId)
+
+	logic.DeactivateAccount(id)
+	var response = "Account riattivato con successo"
+	backToTheFrontend(response, w)
 }
 
 func backToTheFrontend(view any, w http.ResponseWriter) {
