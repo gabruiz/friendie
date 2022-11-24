@@ -43,3 +43,19 @@ func UpdateAccount(model models.Account) models.Account {
 
 	return model
 }
+
+func DeactivateAccount(id int) {
+	_, err := db.Query("UPDATE accounts SET active FALSE where id = ?", id)
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
+}
+
+func ActivateAccount(id int) {
+	_, err := db.Query("UPDATE accounts SET active TRUE where id = ?", id)
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
+}

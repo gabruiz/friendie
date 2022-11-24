@@ -43,3 +43,11 @@ func UpdateAccount(id int, view views.Account) views.Account {
 	model = builders.UpdateAccount(model)
 	return converters.AccountCreateFromModel(model)
 }
+
+func DeactivateAccount(id int) {
+	builders.DeactivateAccount(id)
+}
+
+func ActivateAccount(id int) {
+	builders.ActivateAccount(id)
+}
