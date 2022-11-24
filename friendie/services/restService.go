@@ -1,7 +1,7 @@
 package services
 
 import (
-	"bonder/endpoints"
+	"friendie/endpoints"
 	"log"
 	"net/http"
 

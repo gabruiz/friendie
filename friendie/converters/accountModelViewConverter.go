@@ -1,8 +1,8 @@
 package converters
 
 import (
-	"bonder/models"
-	"bonder/views"
+	"friendie/models"
+	"friendie/views"
 )
 
 func AccountCreateFromView(view views.Account) models.Account {

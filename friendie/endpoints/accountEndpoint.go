@@ -1,9 +1,9 @@
 package endpoints
 
 import (
-	logic "bonder/logics"
-	"bonder/views"
 	"encoding/json"
+	logic "friendie/logics"
+	"friendie/views"
 	"io/ioutil"
 	"log"
 	"net/http"

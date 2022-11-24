@@ -1,11 +1,11 @@
 package builders
 
 import (
-	"bonder/models"
-	"bonder/services/database"
+	"friendie/models"
+	"friendie/services/database"
 )
 
-var db = database.DatabaseConnection()
+var db = database.Connection()
 
 func SaveAccount(model models.Account) models.Account {
 	ins, err := db.Prepare("INSERT INTO accounts (name, surname, email_address, password, city, created_at) VALUES (?,?,?,?,?,?)")

@@ -6,11 +6,11 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func DatabaseConnection() *sql.DB {
+func Connection() *sql.DB {
 	dbDriver := "mysql"
 	dbUser := "root"
 	dbPass := "password"
-	dbName := "bonder"
+	dbName := "friendie"
 	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
 	if err != nil {
 		panic(err.Error())

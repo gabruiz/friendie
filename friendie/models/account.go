@@ -1,7 +1,7 @@
 package models
 
 import (
-	"bonder/enums"
+	"friendie/enums"
 	"time"
 )
 

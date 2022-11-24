@@ -1,7 +1,7 @@
 package views
 
 import (
-	"bonder/enums"
+	"friendie/enums"
 )
 
 type Account struct {

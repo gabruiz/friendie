@@ -1,9 +1,9 @@
 package logic
 
 import (
-	"bonder/builders"
-	"bonder/converters"
-	"bonder/views"
+	"friendie/builders"
+	"friendie/converters"
+	"friendie/views"
 	"time"
 )
 
