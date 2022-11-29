@@ -1,9 +1,9 @@
 package enums
 
-type CityEnum int
+type CityEnum string
 
 const (
-	Catania CityEnum = iota
+	Catania CityEnum = "Catania"
 	Messina
 	Palermo
 	Ragusa

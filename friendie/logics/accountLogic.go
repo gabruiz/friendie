@@ -38,6 +38,14 @@ func UpdateAccount(id int, view views.Account) views.Account {
 		model.Password = view.Password
 	}
 
+	if view.City != "" {
+		model.City = view.City
+	}
+
+	if !view.Birthday.IsZero() {
+		model.Birthday = view.Birthday
+	}
+
 	model.UpdateAt = time.Now()
 
 	model = builders.UpdateAccount(model)
