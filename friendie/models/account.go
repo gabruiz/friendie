@@ -11,6 +11,7 @@ type Account struct {
 	Surname      string
 	EmailAddress string
 	Password     string
+	Birthday     time.Time
 	City         enums.CityEnum
 	Active       bool
 	CreateAt     time.Time

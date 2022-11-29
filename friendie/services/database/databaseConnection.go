@@ -1,17 +1,17 @@
 package database
 
 import (
-	"database/sql"
-
-	_ "github.com/go-sql-driver/mysql"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
-func Connection() *sql.DB {
-	dbDriver := "mysql"
+func Connection() *gorm.DB {
 	dbUser := "root"
 	dbPass := "password"
 	dbName := "friendie"
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	dsn := dbUser + ":" + dbPass + "@tcp(127.0.0.1:3306)/" + dbName + "?charset=utf8mb4&parseTime=True&loc=Local"
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+
 	if err != nil {
 		panic(err.Error())
 	}

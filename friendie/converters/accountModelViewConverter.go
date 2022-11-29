@@ -7,6 +7,7 @@ import (
 
 func AccountCreateFromView(view views.Account) models.Account {
 	var model models.Account
+	model.Id = view.Id
 	model.Name = view.Name
 	model.Surname = view.Surname
 	model.City = view.City
